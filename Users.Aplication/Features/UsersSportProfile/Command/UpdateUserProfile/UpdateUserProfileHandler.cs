@@ -3,12 +3,15 @@ using AutoMapper;
 using Contracts.Persistence;
 using Dominio;
 using MediatR;
+using MicroRabbit.Domain.Core.Bus;
 using Microsoft.AspNetCore.Identity;
+using Users.Application.Models.Common.DTO;
 
     public class UpdateUserProfileHandler(
         IUnitOfWork _unitOfWork,
         IMapper _mapper,
-        UserManager<ApplicationUser> _userManager
+        UserManager<ApplicationUser> _userManager,
+        IEventBus _bus
         )
         : IRequestHandler<UpdateUserSportProfileCommand, Unit>
     {
@@ -39,9 +42,10 @@ using Microsoft.AspNetCore.Identity;
             await SaveUserGoals(request);
             await SaveSportProfile(request, user);
             await _userManager.UpdateAsync(user);
+            var userProfileCommandBus = _mapper.Map<UserProfileEventBus>(request);
+           _bus.Publish(userProfileCommandBus);
 
-
-            return Unit.Value;
+        return Unit.Value;
         }
 
         private async Task SaveUserAllergies(UpdateUserSportProfileCommand request)

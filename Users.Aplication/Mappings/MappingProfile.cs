@@ -15,6 +15,7 @@ using Features.TypesOfNutrition.Queries.GetAllTypeOfNutrition;
 using Features.UsersSportProfile.Command.UpdateUserProfile;
 using Features.UsersSportProfile.Queries.GetUserById;
 using Models.Common.DTO;
+using Users.Application.Models.Common.DTO;
 
     public class MappingProfile : Profile
     {
@@ -36,5 +37,8 @@ using Models.Common.DTO;
             CreateMap<GetUserByIdQueryResult, ApplicationUser>().ReverseMap();
             CreateMap<GetUsersFiltersResult, ApplicationUser>().ReverseMap();
             CreateMap<GetCityByIdResult, City>().ReverseMap();
-        }
+            CreateMap<UpdateUserSportProfileCommand, UserProfileEventBus>().ReverseMap();
+
+        
     }
+}
