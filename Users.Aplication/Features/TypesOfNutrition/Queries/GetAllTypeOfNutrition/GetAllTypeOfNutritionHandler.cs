@@ -1,12 +1,11 @@
-﻿using AutoMapper;
+﻿namespace Users.Aplication.Features.TypesOfNutrition.Queries.GetAllTypeOfNutrition ;
+using AutoMapper;
+using Contracts.Persistence;
 using MediatR;
-using Users.Aplication.Contracts.Persistence;
 
-namespace Users.Aplication.Features.TypesOfNutrition.Queries.GetAllTypeOfNutrition
-{
     public class GetAllTypeOfNutritionHandler(
-                    IUnitOfWork _unitOfWork,
-                    IMapper _mapper
+        IUnitOfWork _unitOfWork,
+        IMapper _mapper
         ) : IRequestHandler<GetAllTypeOfNutritionQuery, List<GetAllTypeOfNutritionResult>>
     {
         public async Task<List<GetAllTypeOfNutritionResult>> Handle(GetAllTypeOfNutritionQuery request, CancellationToken cancellationToken)
@@ -15,4 +14,3 @@ namespace Users.Aplication.Features.TypesOfNutrition.Queries.GetAllTypeOfNutriti
             return _mapper.Map<List<GetAllTypeOfNutritionResult>>(typesOfNutrition);
         }
     }
-}

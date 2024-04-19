@@ -360,6 +360,56 @@ namespace Users.Infraestructure.Migrations
                     b.ToTable("Country");
                 });
 
+            modelBuilder.Entity("Users.Dominio.EnrollServiceUser", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("PlanId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ServiceId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ServiceName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdateAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UpdateBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserAsociateId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PlanId");
+
+                    b.ToTable("EnrollServiceUser");
+                });
+
             modelBuilder.Entity("Users.Dominio.Genre", b =>
                 {
                     b.Property<Guid>("Id")
@@ -527,6 +577,72 @@ namespace Users.Infraestructure.Migrations
                     b.ToTable("PhysicalLevel");
                 });
 
+            modelBuilder.Entity("Users.Dominio.Plan", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("UpdateAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UpdateBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Plan");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("2c312559-173d-4239-a03d-2fdb3f219fa5"),
+                            CreatedBy = "3bfc0e87-e3bb-46b4-9f0a-b0d264fcd6b6",
+                            Description = "Intermediate  Plan",
+                            Enabled = true,
+                            Name = "Intermediate",
+                            Price = 0m
+                        },
+                        new
+                        {
+                            Id = new Guid("672d4087-ac82-42b5-846e-64905d1a09b3"),
+                            CreatedBy = "3bfc0e87-e3bb-46b4-9f0a-b0d264fcd6b6",
+                            Description = "Basic  Plan",
+                            Enabled = true,
+                            Name = "Basic",
+                            Price = 0m
+                        },
+                        new
+                        {
+                            Id = new Guid("7ee7db76-77c2-4353-a509-ebe4fbe4aed4"),
+                            CreatedBy = "3bfc0e87-e3bb-46b4-9f0a-b0d264fcd6b6",
+                            Description = "Premium  Plan",
+                            Enabled = true,
+                            Name = "Premium",
+                            Price = 0m
+                        });
+                });
+
             modelBuilder.Entity("Users.Dominio.SportProfile", b =>
                 {
                     b.Property<Guid>("Id")
@@ -649,6 +765,59 @@ namespace Users.Infraestructure.Migrations
                     b.ToTable("TypeOfNutrition");
                 });
 
+            modelBuilder.Entity("Users.Dominio.TypeOfRecommendation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdateAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UpdateBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TypeOfRecommendation");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("0037fc1b-5414-449c-8f68-ff9d7365f1a0"),
+                            CreatedBy = "System",
+                            Enabled = false,
+                            Name = "Recomendacion"
+                        },
+                        new
+                        {
+                            Id = new Guid("7707e9fa-14cb-4067-a2b0-73437dd87e36"),
+                            CreatedBy = "System",
+                            Enabled = false,
+                            Name = "Nutricional"
+                        },
+                        new
+                        {
+                            Id = new Guid("f3510145-7a12-448a-b4ae-9cf65dfce907"),
+                            CreatedBy = "System",
+                            Enabled = false,
+                            Name = "Seguimiento de ejercicio"
+                        });
+                });
+
             modelBuilder.Entity("Users.Dominio.UserActivity", b =>
                 {
                     b.Property<string>("UsersId")
@@ -748,6 +917,66 @@ namespace Users.Infraestructure.Migrations
                     b.ToTable("UserGoal");
                 });
 
+            modelBuilder.Entity("Users.Dominio.UserRecommendation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("EnrollServiceUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("TypeOfRecommendationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("UpdateAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UpdateBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserAsociateId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EnrollServiceUserId");
+
+                    b.HasIndex("TypeOfRecommendationId");
+
+                    b.HasIndex("UserAsociateId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserRecommendation");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -837,9 +1066,20 @@ namespace Users.Infraestructure.Migrations
                     b.Navigation("State");
                 });
 
+            modelBuilder.Entity("Users.Dominio.EnrollServiceUser", b =>
+                {
+                    b.HasOne("Users.Dominio.Plan", "Plan")
+                        .WithMany("EnrollServiceUsers")
+                        .HasForeignKey("PlanId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Plan");
+                });
+
             modelBuilder.Entity("Users.Dominio.NutrionalProfile", b =>
                 {
-                    b.HasOne("Users.Dominio.TypeOfNutrition", "TypeOfNutrition")
+                    b.HasOne("Users.Dominio.TypeOfNutrition", null)
                         .WithMany("NutrionalProfile")
                         .HasForeignKey("TypeOfNutritionId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -851,14 +1091,12 @@ namespace Users.Infraestructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("TypeOfNutrition");
-
                     b.Navigation("User");
                 });
 
             modelBuilder.Entity("Users.Dominio.SportProfile", b =>
                 {
-                    b.HasOne("Users.Dominio.PhysicalLevel", "PhysicalLevel")
+                    b.HasOne("Users.Dominio.PhysicalLevel", null)
                         .WithMany("SportProfile")
                         .HasForeignKey("PhysicalLevelId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -869,8 +1107,6 @@ namespace Users.Infraestructure.Migrations
                         .HasForeignKey("Users.Dominio.SportProfile", "UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.Navigation("PhysicalLevel");
 
                     b.Navigation("User");
                 });
@@ -931,6 +1167,41 @@ namespace Users.Infraestructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Users.Dominio.UserRecommendation", b =>
+                {
+                    b.HasOne("Users.Dominio.EnrollServiceUser", "EnrollServiceUser")
+                        .WithMany("TypUserRecommendations")
+                        .HasForeignKey("EnrollServiceUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Users.Dominio.TypeOfRecommendation", "TypeOfRecommendation")
+                        .WithMany("UserRecommendations")
+                        .HasForeignKey("TypeOfRecommendationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Users.Dominio.ApplicationUser", "UserAsociate")
+                        .WithMany()
+                        .HasForeignKey("UserAsociateId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Users.Dominio.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("EnrollServiceUser");
+
+                    b.Navigation("TypeOfRecommendation");
+
+                    b.Navigation("User");
+
+                    b.Navigation("UserAsociate");
+                });
+
             modelBuilder.Entity("Users.Dominio.ApplicationUser", b =>
                 {
                     b.Navigation("NutrionalProfile")
@@ -952,6 +1223,11 @@ namespace Users.Infraestructure.Migrations
                     b.Navigation("users");
                 });
 
+            modelBuilder.Entity("Users.Dominio.EnrollServiceUser", b =>
+                {
+                    b.Navigation("TypUserRecommendations");
+                });
+
             modelBuilder.Entity("Users.Dominio.Genre", b =>
                 {
                     b.Navigation("Users");
@@ -960,6 +1236,11 @@ namespace Users.Infraestructure.Migrations
             modelBuilder.Entity("Users.Dominio.PhysicalLevel", b =>
                 {
                     b.Navigation("SportProfile");
+                });
+
+            modelBuilder.Entity("Users.Dominio.Plan", b =>
+                {
+                    b.Navigation("EnrollServiceUsers");
                 });
 
             modelBuilder.Entity("Users.Dominio.State", b =>
@@ -972,6 +1253,11 @@ namespace Users.Infraestructure.Migrations
             modelBuilder.Entity("Users.Dominio.TypeOfNutrition", b =>
                 {
                     b.Navigation("NutrionalProfile");
+                });
+
+            modelBuilder.Entity("Users.Dominio.TypeOfRecommendation", b =>
+                {
+                    b.Navigation("UserRecommendations");
                 });
 #pragma warning restore 612, 618
         }

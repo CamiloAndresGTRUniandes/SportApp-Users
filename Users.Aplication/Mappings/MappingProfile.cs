@@ -1,5 +1,9 @@
 ﻿namespace Users.Aplication.Mappings ;
+using Application.Features.Recomendations.Query.GetRecomendationsByAsociate;
+using Application.Features.Recomendations.Query.GetRecomendationsById;
+using Application.Features.Recomendations.Query.GetRecomendationsByUser;
 using Application.Features.UsersSportProfile.Queries.GetUsersFilters;
+using Application.Models.Common.DTO;
 using AutoMapper;
 using Dominio;
 using Features.Activities.Queries.GetAllActivities;
@@ -15,7 +19,6 @@ using Features.TypesOfNutrition.Queries.GetAllTypeOfNutrition;
 using Features.UsersSportProfile.Command.UpdateUserProfile;
 using Features.UsersSportProfile.Queries.GetUserById;
 using Models.Common.DTO;
-using Users.Application.Models.Common.DTO;
 
     public class MappingProfile : Profile
     {
@@ -38,7 +41,9 @@ using Users.Application.Models.Common.DTO;
             CreateMap<GetUsersFiltersResult, ApplicationUser>().ReverseMap();
             CreateMap<GetCityByIdResult, City>().ReverseMap();
             CreateMap<UpdateUserSportProfileCommand, UserProfileEventBus>().ReverseMap();
-
-        
+            CreateMap<UserRecommendation, GetRecomendationsByUserResult>().ReverseMap();
+            CreateMap<ReferencialTableDTO, TypeOfRecommendation>().ReverseMap();
+            CreateMap<UserRecommendation, GetRecomendationsByAsociateResult>().ReverseMap();
+            CreateMap<GetRecomendationsByIdResult, UserRecommendation>().ReverseMap();
+        }
     }
-}

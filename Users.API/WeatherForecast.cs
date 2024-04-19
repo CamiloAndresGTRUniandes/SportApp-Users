@@ -1,5 +1,5 @@
-namespace Users.API
-{
+namespace Users.API ;
+
     public class WeatherForecast
     {
         public DateTime Date { get; set; }
@@ -10,4 +10,3 @@ namespace Users.API
 
         public string? Summary { get; set; }
     }
-}

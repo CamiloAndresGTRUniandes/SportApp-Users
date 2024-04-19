@@ -1,22 +1,21 @@
-﻿using MediatR;
-using MicroRabbit.Domain.Core.Bus;
-using MicroRabbit.Domain.Core.Commands;
-using MicroRabbit.Domain.Core.Events;
+﻿namespace MicroRabbit.Infra.Bus ;
+using System.Text;
+using Domain.Core.Bus;
+using Domain.Core.Commands;
+using Domain.Core.Events;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using System.Text;
 
-namespace MicroRabbit.Infra.Bus
-{
     public class RabbitMQBus : IEventBus
     {
-        private readonly RabbitMQSettings _rabbitMQSettings;
-        private readonly IMediator _mediator;
-        private readonly Dictionary<string, List<Type>> _handlers;
         private readonly List<Type> _eventTypes;
+        private readonly Dictionary<string, List<Type>> _handlers;
+        private readonly IMediator _mediator;
+        private readonly RabbitMQSettings _rabbitMQSettings;
         private readonly IServiceScopeFactory _serviceScopeFactory;
 
         public RabbitMQBus(IMediator mediator, IServiceScopeFactory serviceScopeFactory, IOptions<RabbitMQSettings> rabbitMQSettings)
@@ -40,7 +39,6 @@ namespace MicroRabbit.Infra.Bus
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {
-
                 var eventName = @event.GetType().Name;
 
                 channel.QueueDeclare(eventName, false, false, false, null);
@@ -50,7 +48,6 @@ namespace MicroRabbit.Infra.Bus
                 var body = Encoding.UTF8.GetBytes(message);
 
                 channel.BasicPublish("", eventName, null, body);
-
             }
         }
 
@@ -78,13 +75,13 @@ namespace MicroRabbit.Infra.Bus
 
             if (_handlers[eventName].Any(s => s.GetType() == handlerType))
             {
-                throw new ArgumentException($"El handler exception {handlerType.Name} ya fue registrado anteriormente por '{eventName}'", nameof(handlerType));
+                throw new ArgumentException($"El handler exception {handlerType.Name} ya fue registrado anteriormente por '{eventName}'",
+                    nameof(handlerType));
             }
 
             _handlers[eventName].Add(handlerType);
 
             StartBasicConsume<T>();
-
         }
 
         private void StartBasicConsume<T>() where T : Event
@@ -97,9 +94,9 @@ namespace MicroRabbit.Infra.Bus
                 DispatchConsumersAsync = true
             };
 
-            bool successFullConecction = false;
-            int counterRetries = 0;
-            string exRabbit = string.Empty;
+            var successFullConecction = false;
+            var counterRetries = 0;
+            var exRabbit = string.Empty;
             do
             {
                 try
@@ -125,14 +122,12 @@ namespace MicroRabbit.Infra.Bus
                     counterRetries++;
                     exRabbit = ex.Message;
                 }
-            }
-            while (!successFullConecction && counterRetries < 15);
+            } while (!successFullConecction && counterRetries < 15);
 
             if (!successFullConecction)
             {
                 throw new Exception(exRabbit);
             }
-
         }
 
         private async Task Consumer_Received(object sender, BasicDeliverEventArgs e)
@@ -146,7 +141,6 @@ namespace MicroRabbit.Infra.Bus
             }
             catch (Exception ex)
             {
-
             }
         }
 
@@ -160,22 +154,18 @@ namespace MicroRabbit.Infra.Bus
 
                     foreach (var subscription in subscriptions)
                     {
-                        var handler = scope.ServiceProvider.GetService(subscription);  //Activator.CreateInstance(subscription);
-                        if (handler == null) continue;
+                        var handler = scope.ServiceProvider.GetService(subscription); //Activator.CreateInstance(subscription);
+                        if (handler == null)
+                        {
+                            continue;
+                        }
                         var eventType = _eventTypes.SingleOrDefault(t => t.Name == eventName);
                         var @event = JsonConvert.DeserializeObject(message, eventType);
                         var concreteType = typeof(IEventHandler<>).MakeGenericType(eventType);
 
-                        await (Task)concreteType.GetMethod("Handle").Invoke(handler, new object[] { @event });
-
+                        await (Task)concreteType.GetMethod("Handle").Invoke(handler, new[] { @event });
                     }
-
                 }
-
-
-
             }
-
         }
     }
-}

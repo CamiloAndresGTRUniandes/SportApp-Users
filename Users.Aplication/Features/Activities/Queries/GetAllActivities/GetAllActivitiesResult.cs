@@ -1,8 +1,6 @@
-﻿using Users.Aplication.Models.Common.DTO;
+﻿namespace Users.Aplication.Features.Activities.Queries.GetAllActivities ;
+using Models.Common.DTO;
 
-namespace Users.Aplication.Features.Activities.Queries.GetAllActivities
-{
-    public class GetAllActivitiesResult:ReferencialTableDTO
+    public class GetAllActivitiesResult : ReferencialTableDTO
     {
     }
-}

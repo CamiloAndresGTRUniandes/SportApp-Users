@@ -1,13 +1,11 @@
-﻿using AutoMapper;
+﻿namespace Users.Aplication.Features.Goals.Queries.GetAllGoals ;
+using AutoMapper;
+using Contracts.Persistence;
 using MediatR;
-using Users.Aplication.Contracts.Persistence;
 
-namespace Users.Aplication.Features.Goals.Queries.GetAllGoals
-{
-    public class GetAllGoalsHandler
-        (
-           IUnitOfWork _unitOfWork,
-                    IMapper _mapper
+    public class GetAllGoalsHandler(
+        IUnitOfWork _unitOfWork,
+        IMapper _mapper
         )
         : IRequestHandler<GetAllGoalsQuery, List<GetAllGoalsResult>>
     {
@@ -17,4 +15,3 @@ namespace Users.Aplication.Features.Goals.Queries.GetAllGoals
             return _mapper.Map<List<GetAllGoalsResult>>(goals);
         }
     }
-}

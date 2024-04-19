@@ -1,15 +1,12 @@
-﻿
+﻿using ValidationException = Users.Aplication.Exceptions.ValidationException;
 
+namespace Users.Aplication.Behavious ;
 using FluentValidation;
 using MediatR;
+using ValidationException = ValidationException;
 
-using ValidationException = Users.Aplication.Exceptions.ValidationException;
-
-namespace Users.Aplication.Behavious
-{
-    public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>  where  TRequest:IRequest<TResponse>
+    public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
     {
-
         private readonly IEnumerable<IValidator<TRequest>> validators;
 
         public ValidationBehavior(IEnumerable<IValidator<TRequest>> validators)
@@ -17,7 +14,6 @@ namespace Users.Aplication.Behavious
             this.validators = validators;
         }
 
-       
 
         public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
         {
@@ -30,11 +26,8 @@ namespace Users.Aplication.Behavious
                 {
                     throw new ValidationException(failures);
                 }
-
-
             }
 
             return await next();
         }
     }
-}

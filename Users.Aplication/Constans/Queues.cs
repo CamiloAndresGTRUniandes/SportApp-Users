@@ -1,10 +1,6 @@
-﻿
+﻿namespace Users.Application.Constans ;
 
-namespace Users.Application.Constans
-{
     public class Queues
     {
-
-        public const string UserUpdateQueue= "UserUpdateQueue"; 
+        public const string UserUpdateQueue = "UserUpdateQueue";
     }
-}

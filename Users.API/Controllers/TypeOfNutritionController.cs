@@ -1,11 +1,10 @@
-﻿using MediatR;
+﻿namespace Users.API.Controllers ;
+using System.Net;
+using Aplication.Features.TypesOfNutrition.Queries.GetAllTypeOfNutrition;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
-using Users.Aplication.Features.TypesOfNutrition.Queries.GetAllTypeOfNutrition;
 
-namespace Users.API.Controllers
-{
     [Route("api/V1/[controller]")]
     [ApiController]
     [Authorize]
@@ -14,6 +13,7 @@ namespace Users.API.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<GetAllTypeOfNutritionResult>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<IEnumerable<GetAllTypeOfNutritionResult>>> GetAll()
-            => await _mediator.Send(new GetAllTypeOfNutritionQuery());
+        {
+            return await _mediator.Send(new GetAllTypeOfNutritionQuery());
+        }
     }
-}

@@ -1,12 +1,11 @@
-﻿using AutoMapper;
+﻿namespace Users.Aplication.Features.NutritionalAllergies.Queries.GetAllNutionalAllergies ;
+using AutoMapper;
+using Contracts.Persistence;
 using MediatR;
-using Users.Aplication.Contracts.Persistence;
 
-namespace Users.Aplication.Features.NutritionalAllergies.Queries.GetAllNutionalAllergies
-{
     public class GetAllNutionalAllergiesHandler(
-                    IUnitOfWork _unitOfWork,
-                    IMapper _mapper
+        IUnitOfWork _unitOfWork,
+        IMapper _mapper
         ) : IRequestHandler<GetAllNutionalAllergiesQuery, List<GetAllNutionalAllergiesResult>>
     {
         public async Task<List<GetAllNutionalAllergiesResult>> Handle(GetAllNutionalAllergiesQuery request, CancellationToken cancellationToken)
@@ -15,4 +14,3 @@ namespace Users.Aplication.Features.NutritionalAllergies.Queries.GetAllNutionalA
             return _mapper.Map<List<GetAllNutionalAllergiesResult>>(alergies);
         }
     }
-}

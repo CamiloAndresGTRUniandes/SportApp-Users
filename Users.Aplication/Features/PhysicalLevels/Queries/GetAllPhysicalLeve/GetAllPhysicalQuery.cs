@@ -1,8 +1,6 @@
-﻿using MediatR;
+﻿namespace Users.Aplication.Features.PhysicalLevels.Queries.GetAllPhysicalLeve ;
+using MediatR;
 
-namespace Users.Aplication.Features.PhysicalLevels.Queries.GetAllPhysicalLeve
-{
-    public class GetAllPhysicalQuery:IRequest<List<GetAllPhysicalResult>>
+    public class GetAllPhysicalQuery : IRequest<List<GetAllPhysicalResult>>
     {
     }
-}

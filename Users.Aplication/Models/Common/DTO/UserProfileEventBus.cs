@@ -1,13 +1,10 @@
-﻿
+﻿namespace Users.Application.Models.Common.DTO ;
+using Aplication.Models.Common.DTO;
+using Constans;
 using MicroRabbit.Domain.Core.Events;
-using Users.Aplication.Models.Common.DTO;
-using Users.Application.Constans;
 
-namespace Users.Application.Models.Common.DTO
-{
-    public class UserProfileEventBus: Event
+    public class UserProfileEventBus : Event
     {
-
         public UserProfileEventBus()
         {
             Queue = Queues.UserUpdateQueue;
@@ -29,6 +26,4 @@ namespace Users.Application.Models.Common.DTO
         public ICollection<Guid> Activities { get; set; } = new HashSet<Guid>();
         public ICollection<Guid> Goals { get; set; } = new HashSet<Guid>();
         public SportProfileDTO SportProfile { get; set; } = new();
-
     }
-}

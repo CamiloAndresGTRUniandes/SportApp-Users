@@ -1,9 +1,9 @@
-﻿using Users.Dominio.Common;
-namespace Users.Aplication.Contracts.Persistence
-{
+﻿namespace Users.Aplication.Contracts.Persistence ;
+using Application.Contracts.Persistence;
+using Dominio.Common;
+
     public interface IUnitOfWork : IDisposable
     {
-
         IGenreRepository GenreRepository { get; }
         ICountryRepository CountryRepository { get; }
         IStateRepository StateRepository { get; }
@@ -15,8 +15,7 @@ namespace Users.Aplication.Contracts.Persistence
         IGoalRepository GoalRepository { get; }
         INutrionalProfileRepository NutrionalProfileRepository { get; }
         IUserAllergyRepository UserAllergyRepository { get; }
-
+        IUserRecomendationRepository UserRecomendationRepository { get; }
         IAsyncRepository<TEntity> Repository<TEntity>() where TEntity : BaseDomainModel;
         Task<int> Complete();
     }
-}

@@ -1,7 +1,6 @@
-﻿using FluentValidation;
+﻿namespace Users.Aplication.Features.UsersSportProfile.Command.UpdateUserProfile ;
+using FluentValidation;
 
-namespace Users.Aplication.Features.UsersSportProfile.Command.UpdateUserProfile
-{
     public class UpdateUserProfileValidator : AbstractValidator<UpdateUserSportProfileCommand>
     {
         public UpdateUserProfileValidator()
@@ -17,10 +16,9 @@ namespace Users.Aplication.Features.UsersSportProfile.Command.UpdateUserProfile
                 .NotEmpty()
                 .EmailAddress();
             RuleFor(p => p.PhoneNumber)
-              .MaximumLength(25);
+                .MaximumLength(25);
 
             RuleFor(p => p.DateOfBirth)
                 .LessThan(DateTime.UtcNow.Date);
         }
     }
-}

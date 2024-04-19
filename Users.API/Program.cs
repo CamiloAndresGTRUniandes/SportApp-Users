@@ -1,11 +1,10 @@
 using MicroRabbit.Infra.Bus;
+using MicroRabbit.Infra.IoC;
 using Microsoft.EntityFrameworkCore;
 using Users.API.Middleware;
 using Users.Aplication;
 using Users.Infraestructure;
 using Users.Infraestructure.Persistence;
-using MicroRabbit.Infra.IoC;
-using MicroRabbit.Domain.Core.Bus;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,7 +20,7 @@ var builder = WebApplication.CreateBuilder(args);
     builder.Services.Configure<RabbitMQSettings>(builder.Configuration.GetSection("RabbitMQSettings"));
     builder.Services.RegisterServices(builder.Configuration);
 
-builder.Services.AddCors(
+    builder.Services.AddCors(
         options =>
         {
             options.AddPolicy
@@ -46,7 +45,7 @@ builder.Services.AddCors(
     }
 
 
-app.UseMiddleware<ExceptionMiddleware>();
+    app.UseMiddleware<ExceptionMiddleware>();
     app.UseAuthentication();
     app.UseAuthorization();
     app.UseCors("CorsPolicy");

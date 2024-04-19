@@ -1,12 +1,11 @@
-﻿using AutoMapper;
+﻿namespace Users.Aplication.Features.Genres.Queries.GetAllGenre ;
+using AutoMapper;
+using Contracts.Persistence;
 using MediatR;
-using Users.Aplication.Contracts.Persistence;
-namespace Users.Aplication.Features.Genres.Queries.GetAllGenre
-{
-    public class GetAllGenresHandler
-    (
-    IUnitOfWork _unitOfWork,
-    IMapper _mapper
+
+    public class GetAllGenresHandler(
+        IUnitOfWork _unitOfWork,
+        IMapper _mapper
         ) : IRequestHandler<GetAllGenresQuery, List<GetAllGenresResult>>
     {
         public async Task<List<GetAllGenresResult>> Handle(GetAllGenresQuery request, CancellationToken cancellationToken)
@@ -15,4 +14,3 @@ namespace Users.Aplication.Features.Genres.Queries.GetAllGenre
             return _mapper.Map<List<GetAllGenresResult>>(genres);
         }
     }
-}

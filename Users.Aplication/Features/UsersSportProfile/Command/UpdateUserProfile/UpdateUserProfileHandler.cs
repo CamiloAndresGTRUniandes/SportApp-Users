@@ -1,11 +1,11 @@
 ﻿namespace Users.Aplication.Features.UsersSportProfile.Command.UpdateUserProfile ;
+using Application.Models.Common.DTO;
 using AutoMapper;
 using Contracts.Persistence;
 using Dominio;
 using MediatR;
 using MicroRabbit.Domain.Core.Bus;
 using Microsoft.AspNetCore.Identity;
-using Users.Application.Models.Common.DTO;
 
     public class UpdateUserProfileHandler(
         IUnitOfWork _unitOfWork,
@@ -43,9 +43,9 @@ using Users.Application.Models.Common.DTO;
             await SaveSportProfile(request, user);
             await _userManager.UpdateAsync(user);
             var userProfileCommandBus = _mapper.Map<UserProfileEventBus>(request);
-           _bus.Publish(userProfileCommandBus);
+            _bus.Publish(userProfileCommandBus);
 
-        return Unit.Value;
+            return Unit.Value;
         }
 
         private async Task SaveUserAllergies(UpdateUserSportProfileCommand request)

@@ -1,12 +1,9 @@
-﻿
+﻿namespace Users.Aplication.Behavious ;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace Users.Aplication.Behavious
-{
     public class UnhandledExceptionBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
     {
-
         private readonly ILogger _loger;
 
         public UnhandledExceptionBehavior(ILogger loger)
@@ -14,12 +11,11 @@ namespace Users.Aplication.Behavious
             _loger = loger;
         }
 
-       
-        public  async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
+
+        public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
         {
             try
             {
-
                 return await next();
             }
             catch (Exception e)
@@ -31,4 +27,3 @@ namespace Users.Aplication.Behavious
             }
         }
     }
-}
