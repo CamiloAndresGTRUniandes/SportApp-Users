@@ -22,8 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Recomendations\Command\" />
-    <Folder Include="Models\Enum\" />
+    <Folder Include="Features\Recommendations\Command\" />
   </ItemGroup>
 
 </Project>

@@ -13,6 +13,8 @@ using Dominio.Common;
 
         private ICountryRepository _countryRepository;
 
+        private IEnrollServiceUserRepository _enrollServiceUserRepository;
+
 
         private IGenreRepository _genreRepository;
 
@@ -47,6 +49,7 @@ using Dominio.Common;
         public IGoalRepository GoalRepository => _goalRepository ??= new GoalRepository(_context);
         public INutrionalProfileRepository NutrionalProfileRepository => _nutrionalProfileRepository ??= new NutrionalProfileRepository(_context);
         public IUserAllergyRepository UserAllergyRepository => _userAllergyRepository ??= new UserAllergyRepository(_context);
+        public IEnrollServiceUserRepository EnrollServiceUserRepository => _enrollServiceUserRepository ??= new EnrollServiceUserRepository(_context);
         public IUserRecomendationRepository UserRecomendationRepository => _userRecomendationRepository ?? new UserRecomendationRepository(_context);
 
         public async Task<int> Complete()

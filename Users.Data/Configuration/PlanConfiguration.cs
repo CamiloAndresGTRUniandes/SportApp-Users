@@ -14,7 +14,8 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
                     Name = "Intermediate",
                     Description = "Intermediate  Plan",
                     CreatedBy = "3bfc0e87-e3bb-46b4-9f0a-b0d264fcd6b6",
-                    Enabled = true
+                    Enabled = true,
+                    Price = 50
                 },
                 new Plan
                 {
@@ -22,7 +23,8 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
                     Name = "Basic",
                     Description = "Basic  Plan",
                     CreatedBy = "3bfc0e87-e3bb-46b4-9f0a-b0d264fcd6b6",
-                    Enabled = true
+                    Enabled = true,
+                    Price = 0
                 }
                 ,
                 new Plan
@@ -31,7 +33,8 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
                     Name = "Premium",
                     Description = "Premium  Plan",
                     CreatedBy = "3bfc0e87-e3bb-46b4-9f0a-b0d264fcd6b6",
-                    Enabled = true
+                    Enabled = true,
+                    Price = 150
                 }
                 );
         }

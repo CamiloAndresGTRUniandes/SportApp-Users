@@ -366,6 +366,13 @@ namespace Users.Infraestructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CategoryName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -397,15 +404,22 @@ namespace Users.Infraestructure.Migrations
 
                     b.Property<string>("UserAsociateId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("WasPayed")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
                     b.HasIndex("PlanId");
+
+                    b.HasIndex("UserAsociateId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("EnrollServiceUser");
                 });
@@ -621,7 +635,7 @@ namespace Users.Infraestructure.Migrations
                             Description = "Intermediate  Plan",
                             Enabled = true,
                             Name = "Intermediate",
-                            Price = 0m
+                            Price = 50m
                         },
                         new
                         {
@@ -639,7 +653,7 @@ namespace Users.Infraestructure.Migrations
                             Description = "Premium  Plan",
                             Enabled = true,
                             Name = "Premium",
-                            Price = 0m
+                            Price = 150m
                         });
                 });
 
@@ -1074,7 +1088,23 @@ namespace Users.Infraestructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Users.Dominio.ApplicationUser", "UserAsociate")
+                        .WithMany()
+                        .HasForeignKey("UserAsociateId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Users.Dominio.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.Navigation("Plan");
+
+                    b.Navigation("User");
+
+                    b.Navigation("UserAsociate");
                 });
 
             modelBuilder.Entity("Users.Dominio.NutrionalProfile", b =>

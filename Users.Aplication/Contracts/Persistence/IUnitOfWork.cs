@@ -15,6 +15,7 @@ using Dominio.Common;
         IGoalRepository GoalRepository { get; }
         INutrionalProfileRepository NutrionalProfileRepository { get; }
         IUserAllergyRepository UserAllergyRepository { get; }
+        IEnrollServiceUserRepository EnrollServiceUserRepository { get; }
         IUserRecomendationRepository UserRecomendationRepository { get; }
         IAsyncRepository<TEntity> Repository<TEntity>() where TEntity : BaseDomainModel;
         Task<int> Complete();

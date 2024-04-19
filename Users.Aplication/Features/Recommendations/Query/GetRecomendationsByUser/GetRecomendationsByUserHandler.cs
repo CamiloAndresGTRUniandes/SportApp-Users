@@ -4,11 +4,11 @@ using AutoMapper;
 using MediatR;
 
     public class GetRecomendationsByUserHandler(IUnitOfWork _unitOfWork, IMapper _mapper)
-        : IRequestHandler<GetRecomendationsByUserQuery, List<GetRecomendationsByUserResult>>
+        : IRequestHandler<GetRecomendationsByUserQuery, List<GetRecommendationsByUserResult>>
     {
-        public async Task<List<GetRecomendationsByUserResult>> Handle(GetRecomendationsByUserQuery request, CancellationToken cancellationToken)
+        public async Task<List<GetRecommendationsByUserResult>> Handle(GetRecomendationsByUserQuery request, CancellationToken cancellationToken)
         {
             var result = await _unitOfWork.UserRecomendationRepository.GetUserNotificationByUserAsync(request.UserId, request.Recommendation);
-            return _mapper.Map<List<GetRecomendationsByUserResult>>(result);
+            return _mapper.Map<List<GetRecommendationsByUserResult>>(result);
         }
     }

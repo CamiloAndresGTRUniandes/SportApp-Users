@@ -104,5 +104,17 @@ using Microsoft.EntityFrameworkCore;
                 .WithOne(g => g.UserAsociate)
                 .HasForeignKey(j => j.UserAsociateId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<ApplicationUser>()
+                .HasMany<EnrollServiceUser>()
+                .WithOne(g => g.User)
+                .HasForeignKey(j => j.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<ApplicationUser>()
+                .HasMany<EnrollServiceUser>()
+                .WithOne(g => g.UserAsociate)
+                .HasForeignKey(j => j.UserAsociateId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
