@@ -8,7 +8,7 @@ using MediatR;
     {
         public async Task<List<GetRecommendationsByUserResult>> Handle(GetRecomendationsByUserQuery request, CancellationToken cancellationToken)
         {
-            var result = await _unitOfWork.UserRecomendationRepository.GetUserNotificationByUserAsync(request.UserId, request.Recommendation);
+            var result = await _unitOfWork.UserRecomendationRepository.GetUserNotificationByUserAsync(request.UserId, request.TypeOfRecommendation);
             return _mapper.Map<List<GetRecommendationsByUserResult>>(result);
         }
     }

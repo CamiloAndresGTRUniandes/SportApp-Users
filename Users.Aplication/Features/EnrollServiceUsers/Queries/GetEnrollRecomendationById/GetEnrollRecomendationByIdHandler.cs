@@ -1,4 +1,4 @@
-﻿namespace Users.Application.Features.EnrollServiceUsers.Queries.GetEnrollRecomendationById;
+﻿namespace Users.Application.Features.EnrollServiceUsers.Queries.GetEnrollRecomendationById ;
 using Aplication.Contracts.Persistence;
 using AutoMapper;
 using MediatR;

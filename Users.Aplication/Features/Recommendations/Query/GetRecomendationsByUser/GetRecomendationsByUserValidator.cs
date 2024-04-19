@@ -7,5 +7,7 @@ using FluentValidation;
         {
             RuleFor(p => p.UserId)
                 .NotEmpty();
-        }
+
+            RuleFor(p => p.TypeOfRecommendation).NotEmpty();
+    }
     }

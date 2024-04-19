@@ -14,4 +14,5 @@ using Aplication.Models.Common.DTO;
         public string CategoryName { get; set; }
         public ReferencialTableDTO Plan { get; set; }
         public UserBasicInfo User { get; set; }
+      
     }

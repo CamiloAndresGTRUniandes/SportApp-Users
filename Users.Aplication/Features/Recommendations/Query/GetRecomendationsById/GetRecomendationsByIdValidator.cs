@@ -1,6 +1,7 @@
 ﻿namespace Users.Application.Features.Recomendations.Query.GetRecomendationsById ;
 using FluentValidation;
 using Recommendations.Query.GetRecomendationsById;
+using Users.Dominio;
 
     public class GetRecomendationsByIdValidator : AbstractValidator<GetRecomendationsByIdQuery>
     {
@@ -8,5 +9,7 @@ using Recommendations.Query.GetRecomendationsById;
         {
             RuleFor(p => p.Id)
                 .NotEmpty();
+
+           
         }
     }

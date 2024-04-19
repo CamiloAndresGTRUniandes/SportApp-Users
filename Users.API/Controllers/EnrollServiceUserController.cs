@@ -1,11 +1,11 @@
 ﻿namespace Users.API.Controllers ;
 using System.Net;
 using Application.Features.EnrollServiceUsers.Commands.CreateEnrollServiceUser;
+using Application.Features.EnrollServiceUsers.Queries.GetEnrollRecomendationById;
 using Application.Features.EnrollServiceUsers.Queries.GetEnrollRecomendationsByAsociate;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Users.Application.Features.EnrollServiceUsers.Queries.GetEnrollRecomendationById;
 
     [Route("api/V1/[controller]")]
     [ApiController]
@@ -34,10 +34,10 @@ using Users.Application.Features.EnrollServiceUsers.Queries.GetEnrollRecomendati
         [ProducesResponseType(typeof(GetEnrollRecomendationsByIdResult), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<GetEnrollRecomendationsByIdResult>> GetById(Guid id)
         {
-            return await _mediator.Send(new GetEnrollRecomendationsByIdQuery()
+            return await _mediator.Send(new GetEnrollRecomendationsByIdQuery
             {
                 Id = id
             }
                 );
         }
-}
+    }

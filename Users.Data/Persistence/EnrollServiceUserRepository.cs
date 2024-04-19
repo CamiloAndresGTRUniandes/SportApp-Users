@@ -16,6 +16,8 @@ using Microsoft.EntityFrameworkCore;
                 .Include(p => p.Plan)
                 .Include(p => p.User)
                 .Where(p => p.UserAsociateId == userAsociateId)
+                .Include(p => p.UserRecommendations)
+                .ThenInclude(tp => tp.TypeOfRecommendation)
                 .ToListAsync();
 
             return result;
@@ -28,6 +30,7 @@ using Microsoft.EntityFrameworkCore;
                 .Include(p => p.Plan)
                 .Include(p => p.User)
                 .Include(p => p.UserRecommendations)
+                .ThenInclude(tp=>tp.TypeOfRecommendation)
                 .Where(p => p.Id == id)
                 .FirstOrDefaultAsync();
 

@@ -1,9 +1,11 @@
 ﻿namespace Users.Aplication.Mappings ;
 
 using Application.Features.EnrollServiceUsers.Commands.CreateEnrollServiceUser;
+using Application.Features.EnrollServiceUsers.Queries.GetEnrollRecomendationById;
 using Application.Features.EnrollServiceUsers.Queries.GetEnrollRecomendationsByAsociate;
 using Application.Features.Recomendations.Query.GetRecomendationsById;
 using Application.Features.Recomendations.Query.GetRecomendationsByUser;
+using Application.Features.Recommendations.Command.CreateUserRecommendation;
 using Application.Features.UsersSportProfile.Queries.GetUsersFilters;
 using Application.Models.Common.DTO;
 using AutoMapper;
@@ -21,7 +23,6 @@ using Features.TypesOfNutrition.Queries.GetAllTypeOfNutrition;
 using Features.UsersSportProfile.Command.UpdateUserProfile;
 using Features.UsersSportProfile.Queries.GetUserById;
 using Models.Common.DTO;
-using Users.Application.Features.EnrollServiceUsers.Queries.GetEnrollRecomendationById;
 
     public class MappingProfile : Profile
     {
@@ -53,5 +54,6 @@ using Users.Application.Features.EnrollServiceUsers.Queries.GetEnrollRecomendati
             CreateMap<Plan, ReferencialTableDTO>().ReverseMap();
             CreateMap<GetEnrollRecomendationsByIdResult, EnrollServiceUser>().ReverseMap();
             CreateMap<RecommendationsDTO, UserRecommendation>().ReverseMap();
+            CreateMap<CreateUserRecommendationCommand, UserRecommendation>().ReverseMap();
         }
     }
