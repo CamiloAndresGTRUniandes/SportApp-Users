@@ -30,7 +30,7 @@ using Microsoft.EntityFrameworkCore;
                 .Include(p => p.Plan)
                 .Include(p => p.User)
                 .Include(p => p.UserRecommendations)
-                .ThenInclude(tp=>tp.TypeOfRecommendation)
+                .ThenInclude(tp => tp.TypeOfRecommendation)
                 .Where(p => p.Id == id)
                 .FirstOrDefaultAsync();
 

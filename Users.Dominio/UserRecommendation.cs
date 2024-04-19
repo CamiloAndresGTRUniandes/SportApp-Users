@@ -21,6 +21,4 @@ using Common;
 
         public Guid EnrollServiceUserId { get; set; }
         public EnrollServiceUser EnrollServiceUser { get; set; }
-
-   
-}
+    }

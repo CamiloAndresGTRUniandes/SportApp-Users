@@ -6,6 +6,8 @@ using Application.Features.EnrollServiceUsers.Queries.GetEnrollRecomendationsByA
 using Application.Features.Recomendations.Query.GetRecomendationsById;
 using Application.Features.Recomendations.Query.GetRecomendationsByUser;
 using Application.Features.Recommendations.Command.CreateUserRecommendation;
+using Application.Features.UserGoalTrackings.Command.UserGoalTrackingSave;
+using Application.Features.UserGoalTrackings.Queries.UserGoalTrackingByUserId;
 using Application.Features.UsersSportProfile.Queries.GetUsersFilters;
 using Application.Models.Common.DTO;
 using AutoMapper;
@@ -55,5 +57,7 @@ using Models.Common.DTO;
             CreateMap<GetEnrollRecomendationsByIdResult, EnrollServiceUser>().ReverseMap();
             CreateMap<RecommendationsDTO, UserRecommendation>().ReverseMap();
             CreateMap<CreateUserRecommendationCommand, UserRecommendation>().ReverseMap();
+            CreateMap<UserGoalTrackingSaveCommand, UserGoalTracking>().ReverseMap();
+            CreateMap<UserGoalTrackingByUserIdResult, UserGoalTracking>().ReverseMap();
         }
     }

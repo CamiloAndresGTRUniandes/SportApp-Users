@@ -9,5 +9,5 @@ using FluentValidation;
                 .NotEmpty();
 
             RuleFor(p => p.TypeOfRecommendation).NotEmpty();
-    }
+        }
     }
