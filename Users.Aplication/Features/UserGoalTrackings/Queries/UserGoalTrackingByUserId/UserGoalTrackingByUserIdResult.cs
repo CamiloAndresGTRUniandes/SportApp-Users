@@ -7,5 +7,4 @@
         public decimal CmsInArm { get; set; }
         public decimal PrInSquad { get; set; }
         public string UserId { get; set; }
-
     }
