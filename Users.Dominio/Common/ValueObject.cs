@@ -1,6 +1,5 @@
-﻿
-namespace Users.Dominio.Common
-{
+﻿namespace Users.Dominio.Common ;
+
     public abstract class ValueObject
     {
         protected static bool EqualOperator(ValueObject left, ValueObject right)
@@ -14,7 +13,7 @@ namespace Users.Dominio.Common
 
         protected static bool NotEqualOperator(ValueObject left, ValueObject right)
         {
-            return !(EqualOperator(left, right));
+            return !EqualOperator(left, right);
         }
 
         protected abstract IEnumerable<object> GetEqualityComponents();
@@ -28,7 +27,7 @@ namespace Users.Dominio.Common
 
             var other = (ValueObject)obj;
 
-            return this.GetEqualityComponents().SequenceEqual(other.GetEqualityComponents());
+            return GetEqualityComponents().SequenceEqual(other.GetEqualityComponents());
         }
 
         public override int GetHashCode()
@@ -37,5 +36,4 @@ namespace Users.Dominio.Common
                 .Select(x => x != null ? x.GetHashCode() : 0)
                 .Aggregate((x, y) => x ^ y);
         }
-        }
-}
+    }

@@ -1,3 +1,5 @@
+using MicroRabbit.Infra.Bus;
+using MicroRabbit.Infra.IoC;
 using Microsoft.EntityFrameworkCore;
 using Users.API.Middleware;
 using Users.Aplication;
@@ -15,7 +17,8 @@ var builder = WebApplication.CreateBuilder(args);
 
     builder.Services.AddInfrastructureServices(builder.Configuration);
     builder.Services.AddApplicationServices();
-
+    builder.Services.Configure<RabbitMQSettings>(builder.Configuration.GetSection("RabbitMQSettings"));
+    builder.Services.RegisterServices(builder.Configuration);
 
     builder.Services.AddCors(
         options =>

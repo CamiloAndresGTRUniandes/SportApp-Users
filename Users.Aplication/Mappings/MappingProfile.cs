@@ -1,5 +1,16 @@
 ﻿namespace Users.Aplication.Mappings ;
+
+using Application.Features.EnrollServiceUsers.Commands.CreateEnrollServiceUser;
+using Application.Features.EnrollServiceUsers.Queries.GetEnrollRecomendationById;
+using Application.Features.EnrollServiceUsers.Queries.GetEnrollRecomendationsByAsociate;
+using Application.Features.Recomendations.Query.GetRecomendationsById;
+using Application.Features.Recomendations.Query.GetRecomendationsByUser;
+using Application.Features.Recommendations.Command.CreateUserRecommendation;
+using Application.Features.TypeOfRecomendations.Queries.GetAllTypeOfRecomendations;
+using Application.Features.UserGoalTrackings.Command.UserGoalTrackingSave;
+using Application.Features.UserGoalTrackings.Queries.UserGoalTrackingByUserId;
 using Application.Features.UsersSportProfile.Queries.GetUsersFilters;
+using Application.Models.Common.DTO;
 using AutoMapper;
 using Dominio;
 using Features.Activities.Queries.GetAllActivities;
@@ -35,6 +46,20 @@ using Models.Common.DTO;
             CreateMap<SportProfile, SportProfileDTO>().ReverseMap();
             CreateMap<GetUserByIdQueryResult, ApplicationUser>().ReverseMap();
             CreateMap<GetUsersFiltersResult, ApplicationUser>().ReverseMap();
+            CreateMap<UserBasicInfo, ApplicationUser>().ReverseMap();
             CreateMap<GetCityByIdResult, City>().ReverseMap();
+            CreateMap<UpdateUserSportProfileCommand, UserProfileEventBus>().ReverseMap();
+            CreateMap<UserRecommendation, GetRecommendationsByUserResult>().ReverseMap();
+            CreateMap<ReferencialTableDTO, TypeOfRecommendation>().ReverseMap();
+            CreateMap<EnrollServiceUser, GetEnrollRecomendationsByAsociateResult>().ReverseMap();
+            CreateMap<GetRecommendationsByIdResult, UserRecommendation>().ReverseMap();
+            CreateMap<CreateEnrollServiceUserCommand, EnrollServiceUser>().ReverseMap();
+            CreateMap<Plan, ReferencialTableDTO>().ReverseMap();
+            CreateMap<GetEnrollRecomendationsByIdResult, EnrollServiceUser>().ReverseMap();
+            CreateMap<RecommendationsDTO, UserRecommendation>().ReverseMap();
+            CreateMap<CreateUserRecommendationCommand, UserRecommendation>().ReverseMap();
+            CreateMap<UserGoalTrackingSaveCommand, UserGoalTracking>().ReverseMap();
+            CreateMap<UserGoalTrackingByUserIdResult, UserGoalTracking>().ReverseMap();
+            CreateMap<GetAllTypeOfRecomendationsResult, TypeOfRecommendation>().ReverseMap();
         }
     }

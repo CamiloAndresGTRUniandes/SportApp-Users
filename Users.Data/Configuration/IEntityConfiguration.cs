@@ -1,6 +1,5 @@
-﻿namespace Users.Infraestructure.Configuration
-{
+﻿namespace Users.Infraestructure.Configuration ;
+
     public interface IEntityConfiguration<T>
     {
     }
-}

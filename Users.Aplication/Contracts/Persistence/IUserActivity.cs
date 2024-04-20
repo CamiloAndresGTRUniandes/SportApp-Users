@@ -1,6 +1,5 @@
-﻿namespace Users.Aplication.Contracts.Persistence
-{
+﻿namespace Users.Aplication.Contracts.Persistence ;
+
     public interface IUserActivity
     {
     }
-}

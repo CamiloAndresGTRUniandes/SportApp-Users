@@ -27,4 +27,5 @@ using Microsoft.AspNetCore.Identity;
         public virtual City City { get; set; }
         public virtual NutrionalProfile NutrionalProfile { get; set; }
         public virtual SportProfile SportProfile { get; set; }
+        public virtual UserGoalTracking UserGoalTracking { get; set; }
     }

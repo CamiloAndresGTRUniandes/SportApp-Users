@@ -1,12 +1,11 @@
-﻿using AutoMapper;
+﻿namespace Users.Aplication.Features.PhysicalLevels.Queries.GetAllPhysicalLeve ;
+using AutoMapper;
+using Contracts.Persistence;
 using MediatR;
-using Users.Aplication.Contracts.Persistence;
 
-namespace Users.Aplication.Features.PhysicalLevels.Queries.GetAllPhysicalLeve
-{
     public class GetAllPhysicalHandler(
-             IUnitOfWork _unitOfWork,
-                    IMapper _mapper
+        IUnitOfWork _unitOfWork,
+        IMapper _mapper
         ) : IRequestHandler<GetAllPhysicalQuery, List<GetAllPhysicalResult>>
     {
         public async Task<List<GetAllPhysicalResult>> Handle(GetAllPhysicalQuery request, CancellationToken cancellationToken)
@@ -15,4 +14,3 @@ namespace Users.Aplication.Features.PhysicalLevels.Queries.GetAllPhysicalLeve
             return _mapper.Map<List<GetAllPhysicalResult>>(physicalLeves);
         }
     }
-}

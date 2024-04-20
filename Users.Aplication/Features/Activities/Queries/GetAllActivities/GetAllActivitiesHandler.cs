@@ -1,13 +1,11 @@
-﻿using AutoMapper;
+﻿namespace Users.Aplication.Features.Activities.Queries.GetAllActivities ;
+using AutoMapper;
+using Contracts.Persistence;
 using MediatR;
-using Users.Aplication.Contracts.Persistence;
 
-namespace Users.Aplication.Features.Activities.Queries.GetAllActivities
-{
-    public class GetAllActivitiesHandler
-         (
-    IUnitOfWork _unitOfWork,
-    IMapper _mapper
+    public class GetAllActivitiesHandler(
+        IUnitOfWork _unitOfWork,
+        IMapper _mapper
         ) : IRequestHandler<GetAllActivitiesQuery, List<GetAllActivitiesResult>>
     {
         public async Task<List<GetAllActivitiesResult>> Handle(GetAllActivitiesQuery request, CancellationToken cancellationToken)
@@ -16,4 +14,3 @@ namespace Users.Aplication.Features.Activities.Queries.GetAllActivities
             return _mapper.Map<List<GetAllActivitiesResult>>(activities);
         }
     }
-}

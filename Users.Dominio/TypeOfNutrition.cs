@@ -1,8 +1,7 @@
-﻿using Users.Dominio.Common;
+﻿namespace Users.Dominio ;
+using Common;
 
-namespace Users.Dominio
-{
-    public class TypeOfNutrition:BaseDomainModel
+    public class TypeOfNutrition : BaseDomainModel
     {
         public TypeOfNutrition()
         {
@@ -12,4 +11,3 @@ namespace Users.Dominio
         public string Name { get; set; } = string.Empty;
         public ICollection<NutrionalProfile> NutrionalProfile { get; set; }
     }
-}

@@ -1,11 +1,10 @@
-﻿using MediatR;
+﻿namespace Users.API.Controllers ;
+using System.Net;
+using Aplication.Features.Goals.Queries.GetAllGoals;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
-using Users.Aplication.Features.Goals.Queries.GetAllGoals;
 
-namespace Users.API.Controllers
-{
     [Route("api/V1/[controller]")]
     [ApiController]
     [Authorize]
@@ -14,6 +13,7 @@ namespace Users.API.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<GetAllGoalsResult>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<IEnumerable<GetAllGoalsResult>>> GetAll()
-            => await _mediator.Send(new GetAllGoalsQuery());
+        {
+            return await _mediator.Send(new GetAllGoalsQuery());
+        }
     }
-}

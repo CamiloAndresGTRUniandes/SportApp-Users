@@ -1,23 +1,19 @@
-﻿using AutoMapper;
+﻿namespace Users.Aplication.Features.States.Queries.GetStatesByCountry ;
+using AutoMapper;
+using Contracts.Persistence;
 using MediatR;
-using Users.Aplication.Contracts.Persistence;
 
-namespace Users.Aplication.Features.States.Queries.GetStatesByCountry
-{
-    public class GetStatesByCountryHandler
-    (
-    IUnitOfWork _unitOfWork,
-    IMapper _mapper
-    ) : IRequestHandler<GetStatesByCountryQuery, List<GetStatesByCountryResult>>
+    public class GetStatesByCountryHandler(
+        IUnitOfWork _unitOfWork,
+        IMapper _mapper
+        ) : IRequestHandler<GetStatesByCountryQuery, List<GetStatesByCountryResult>>
     {
         public async Task<List<GetStatesByCountryResult>> Handle(GetStatesByCountryQuery request, CancellationToken cancellationToken)
         {
-
             var states = await _unitOfWork
-                            .StateRepository
-                            .GetStatesByCountry(request.CountryId);
+                .StateRepository
+                .GetStatesByCountry(request.CountryId);
 
             return _mapper.Map<List<GetStatesByCountryResult>>(states);
         }
     }
-}

@@ -1,6 +1,5 @@
-﻿
-namespace Users.Aplication.Models
-{
+﻿namespace Users.Aplication.Models ;
+
     public class EmailSettings
     {
         public string ApiKey { get; set; }
@@ -8,6 +7,4 @@ namespace Users.Aplication.Models
         public string FromAddress { get; set; }
 
         public string FromName { get; set; }
-
     }
-}

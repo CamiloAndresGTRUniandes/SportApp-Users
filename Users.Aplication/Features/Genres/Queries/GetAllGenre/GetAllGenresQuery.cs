@@ -1,6 +1,6 @@
-﻿using MediatR;
+﻿namespace Users.Aplication.Features.Genres.Queries.GetAllGenre ;
+using MediatR;
 
-namespace Users.Aplication.Features.Genres.Queries.GetAllGenre
-{
-    public class GetAllGenresQuery : IRequest<List<GetAllGenresResult>> { }
-}
+    public class GetAllGenresQuery : IRequest<List<GetAllGenresResult>>
+    {
+    }
