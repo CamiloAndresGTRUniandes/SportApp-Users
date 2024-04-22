@@ -43,7 +43,7 @@ using Microsoft.AspNetCore.Identity;
             await SaveSportProfile(request, user);
             await _userManager.UpdateAsync(user);
             var userProfileCommandBus = _mapper.Map<UserProfileEventBus>(request);
-            _bus.Publish(userProfileCommandBus);
+            //_bus.Publish(userProfileCommandBus);
 
             return Unit.Value;
         }
