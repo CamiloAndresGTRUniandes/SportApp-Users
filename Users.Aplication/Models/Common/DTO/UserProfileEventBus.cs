@@ -1,7 +1,7 @@
 ﻿namespace Users.Application.Models.Common.DTO ;
 using Aplication.Models.Common.DTO;
 using Constans;
-using MicroRabbit.Domain.Core.Events;
+using Services.Domain.Core.Events;
 
     public class UserProfileEventBus : Event
     {

@@ -4,8 +4,8 @@ using AutoMapper;
 using Contracts.Persistence;
 using Dominio;
 using MediatR;
-using MicroRabbit.Domain.Core.Bus;
 using Microsoft.AspNetCore.Identity;
+using Services.Domain.Core.Bus;
 
     public class UpdateUserProfileHandler(
         IUnitOfWork _unitOfWork,
@@ -43,7 +43,7 @@ using Microsoft.AspNetCore.Identity;
             await SaveSportProfile(request, user);
             await _userManager.UpdateAsync(user);
             var userProfileCommandBus = _mapper.Map<UserProfileEventBus>(request);
-            //_bus.Publish(userProfileCommandBus);
+            await _bus.Publish(userProfileCommandBus);
 
             return Unit.Value;
         }

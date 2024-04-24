@@ -1,4 +1,4 @@
-﻿namespace MicroRabbit.Domain.Core.Bus ;
+﻿namespace Services.Domain.Core.Bus ;
 using Events;
 
     public interface IEventHandler<in TEvent> : IEventHandler

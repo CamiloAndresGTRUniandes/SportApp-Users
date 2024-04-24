@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MicroRabbit.Domain.Core\MicroRabbit.Domain.Core.csproj" />
     <ProjectReference Include="..\Users.Dominio\Users.Dominio.csproj" />
+    <ProjectReference Include="..\Services.Domain.Core\Services.Domain.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>

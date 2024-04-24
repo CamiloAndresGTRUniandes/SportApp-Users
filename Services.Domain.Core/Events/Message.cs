@@ -1,4 +1,4 @@
-﻿namespace MicroRabbit.Domain.Core.Events ;
+﻿namespace Services.Domain.Core.Events ;
 using MediatR;
 
     public abstract class Message : IRequest<bool>

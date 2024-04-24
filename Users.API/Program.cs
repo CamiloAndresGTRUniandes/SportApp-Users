@@ -1,6 +1,6 @@
-using MicroRabbit.Infra.Bus;
-using MicroRabbit.Infra.IoC;
 using Microsoft.EntityFrameworkCore;
+using Service.Infra.Bus;
+using ServiceBus.Infra.IoC;
 using Users.API.Middleware;
 using Users.Aplication;
 using Users.Infraestructure;
@@ -17,7 +17,7 @@ var builder = WebApplication.CreateBuilder(args);
 
     builder.Services.AddInfrastructureServices(builder.Configuration);
     builder.Services.AddApplicationServices();
-    builder.Services.Configure<RabbitMQSettings>(builder.Configuration.GetSection("RabbitMQSettings"));
+    builder.Services.Configure<ServiceMqSettings>(builder.Configuration.GetSection("ServiceMqSettings"));
     builder.Services.RegisterServices(builder.Configuration);
 
     builder.Services.AddCors(
