@@ -28,4 +28,5 @@ using Microsoft.AspNetCore.Identity;
         public virtual NutrionalProfile NutrionalProfile { get; set; }
         public virtual SportProfile SportProfile { get; set; }
         public virtual UserGoalTracking UserGoalTracking { get; set; }
+        public ICollection<ProductEventSuscription> ProductEventSuscriptions { get; set; }
     }

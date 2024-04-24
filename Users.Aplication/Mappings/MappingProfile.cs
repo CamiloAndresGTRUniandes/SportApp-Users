@@ -3,6 +3,7 @@
 using Application.Features.EnrollServiceUsers.Commands.CreateEnrollServiceUser;
 using Application.Features.EnrollServiceUsers.Queries.GetEnrollRecomendationById;
 using Application.Features.EnrollServiceUsers.Queries.GetEnrollRecomendationsByAsociate;
+using Application.Features.ProductEventSuscriptions.Commands.ProductEventSuscriptionSave;
 using Application.Features.Recomendations.Query.GetRecomendationsById;
 using Application.Features.Recomendations.Query.GetRecomendationsByUser;
 using Application.Features.Recommendations.Command.CreateUserRecommendation;
@@ -61,5 +62,6 @@ using Models.Common.DTO;
             CreateMap<UserGoalTrackingSaveCommand, UserGoalTracking>().ReverseMap();
             CreateMap<UserGoalTrackingByUserIdResult, UserGoalTracking>().ReverseMap();
             CreateMap<GetAllTypeOfRecomendationsResult, TypeOfRecommendation>().ReverseMap();
+            CreateMap<ProductEventSuscriptionSaveCommnand, ProductEventSuscription>().ReverseMap();
         }
     }
