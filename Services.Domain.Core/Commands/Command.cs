@@ -1,4 +1,4 @@
-﻿namespace MicroRabbit.Domain.Core.Commands ;
+﻿namespace Services.Domain.Core.Commands ;
 using Events;
 
     public abstract class Command : Message
@@ -9,4 +9,5 @@ using Events;
         }
 
         public DateTime Timestamp { get; protected set; }
+        public string Queue { get; set; }
     }
