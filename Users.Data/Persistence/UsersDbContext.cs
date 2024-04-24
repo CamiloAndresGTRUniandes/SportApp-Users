@@ -30,6 +30,7 @@ using Microsoft.EntityFrameworkCore;
         public DbSet<Plan> Plan { get; set; }
         public DbSet<EnrollServiceUser> EnrollServiceUser { get; set; }
         public DbSet<UserGoalTracking> UserGoalTracking { get; set; }
+        public DbSet<ProductEventSuscription> ProductEventSuscription { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
