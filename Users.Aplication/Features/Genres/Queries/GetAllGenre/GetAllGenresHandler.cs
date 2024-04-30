@@ -3,11 +3,17 @@ using AutoMapper;
 using Contracts.Persistence;
 using MediatR;
 
-    public class GetAllGenresHandler(
-        IUnitOfWork _unitOfWork,
-        IMapper _mapper
-        ) : IRequestHandler<GetAllGenresQuery, List<GetAllGenresResult>>
+    public class GetAllGenresHandler : IRequestHandler<GetAllGenresQuery, List<GetAllGenresResult>>
     {
+        private readonly IMapper _mapper;
+        private readonly IUnitOfWork _unitOfWork;
+
+        public GetAllGenresHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        {
+            _unitOfWork = unitOfWork;
+            _mapper = mapper;
+        }
+
         public async Task<List<GetAllGenresResult>> Handle(GetAllGenresQuery request, CancellationToken cancellationToken)
         {
             var genres = await _unitOfWork.GenreRepository.GetAllAsync();

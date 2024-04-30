@@ -7,5 +7,5 @@
         public string? CreatedBy { get; set; }
         public DateTime? UpdateAt { get; set; }
         public string? UpdateBy { get; set; }
-        public bool Enabled { get; set; }
+        public bool Enabled { get; set; } = true;
     }

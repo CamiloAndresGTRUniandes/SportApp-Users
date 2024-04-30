@@ -29,8 +29,5 @@ using MediatR;
             prodEventSus.Suscribed = true;
             prodEventSus.Message = "Super ya quedaste inscrito :)";
             return prodEventSus;
-
-
-            throw new NotImplementedException();
         }
     }
