@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Users.Infraestructure.Persistence;
 
@@ -11,9 +12,11 @@ using Users.Infraestructure.Persistence;
 namespace Users.Infraestructure.Migrations
 {
     [DbContext(typeof(UsersDbContext))]
-    partial class UsersDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240430031939_intensity-recordTraining")]
+    partial class intensityrecordTraining
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -783,9 +786,6 @@ namespace Users.Infraestructure.Migrations
                     b.Property<bool>("Enabled")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("EndDateTime")
-                        .HasColumnType("datetime2");
-
                     b.Property<decimal>("FTP")
                         .HasColumnType("decimal(18,2)");
 
@@ -799,14 +799,11 @@ namespace Users.Infraestructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("StartDateTime")
+                    b.Property<decimal>("TotalCalories")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("TotalTime")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("TotalCalories")
-                        .HasColumnType("int");
-
-                    b.Property<TimeSpan>("TotalTime")
-                        .HasColumnType("time");
 
                     b.Property<DateTime?>("UpdateAt")
                         .HasColumnType("datetime2");

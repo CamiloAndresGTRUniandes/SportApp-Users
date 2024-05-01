@@ -26,6 +26,8 @@ using Dominio.Common;
 
         private IPhysicalLevelRepository _physicalLevelRepository;
 
+        private IRecordTrainingSessionRepository _recordTrainingSessionRepository;
+
         private Hashtable _repositories;
 
         private IStateRepository _stateRepository;
@@ -66,6 +68,10 @@ using Dominio.Common;
 
         public IUserRecomendationRepository UserRecomendationRepository
             => _userRecomendationRepository ?? new UserRecomendationRepository(UsersDbContext);
+
+        public IRecordTrainingSessionRepository RecordTrainingSessionRepository
+            => _recordTrainingSessionRepository ??= new RecordTrainingSessionRepository(UsersDbContext);
+
 
         public async Task<int> Complete()
         {

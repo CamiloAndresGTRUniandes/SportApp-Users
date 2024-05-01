@@ -7,6 +7,7 @@ using Application.Features.ProductEventSuscriptions.Commands.ProductEventSuscrip
 using Application.Features.Recomendations.Query.GetRecomendationsById;
 using Application.Features.Recomendations.Query.GetRecomendationsByUser;
 using Application.Features.Recommendations.Command.CreateUserRecommendation;
+using Application.Features.RecordTrainingSessions.Commads;
 using Application.Features.TypeOfRecomendations.Queries.GetAllTypeOfRecomendations;
 using Application.Features.UserGoalTrackings.Command.UserGoalTrackingSave;
 using Application.Features.UserGoalTrackings.Queries.UserGoalTrackingByUserId;
@@ -63,5 +64,6 @@ using Models.Common.DTO;
             CreateMap<UserGoalTrackingByUserIdResult, UserGoalTracking>().ReverseMap();
             CreateMap<GetAllTypeOfRecomendationsResult, TypeOfRecommendation>().ReverseMap();
             CreateMap<ProductEventSuscriptionSaveCommnand, ProductEventSuscription>().ReverseMap();
+            CreateMap<RecordTrainingSession, RecordTrainingSessionsCreateCommand>().ReverseMap();
         }
     }
