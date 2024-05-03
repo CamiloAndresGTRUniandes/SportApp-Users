@@ -3,11 +3,19 @@ using AutoMapper;
 using Contracts.Persistence;
 using MediatR;
 
-    public class GetCityByStateHandler(
-        IUnitOfWork _unitOfWork,
-        IMapper _mapper
-        ) : IRequestHandler<GetCityByStateQuery, List<GetCityByStateResult>>
+    public class GetCityByStateHandler : IRequestHandler<GetCityByStateQuery, List<GetCityByStateResult>>
     {
+        private readonly IMapper _mapper;
+
+        private readonly IUnitOfWork _unitOfWork;
+
+        public GetCityByStateHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        {
+            _unitOfWork = unitOfWork;
+            _mapper = mapper;
+        }
+
+
         public async Task<List<GetCityByStateResult>> Handle(GetCityByStateQuery request, CancellationToken cancellationToken)
         {
             var cities = await _unitOfWork

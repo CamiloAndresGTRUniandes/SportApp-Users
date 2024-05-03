@@ -31,6 +31,8 @@ using Microsoft.EntityFrameworkCore;
         public DbSet<EnrollServiceUser> EnrollServiceUser { get; set; }
         public DbSet<UserGoalTracking> UserGoalTracking { get; set; }
         public DbSet<ProductEventSuscription> ProductEventSuscription { get; set; }
+        public DbSet<RecordTrainingSession> RecordTrainingSession { get; set; }
+        public DbSet<Intensity> Intensity { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
@@ -55,7 +57,7 @@ using Microsoft.EntityFrameworkCore;
         {
             base.OnModelCreating(modelBuilder);
 
-
+            modelBuilder.ApplyConfiguration(new IntensityConfiguration());
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
             modelBuilder.ApplyConfiguration(new TypeOfRecommendationsConfiguration());
             modelBuilder.ApplyConfiguration(new PlanConfiguration());
