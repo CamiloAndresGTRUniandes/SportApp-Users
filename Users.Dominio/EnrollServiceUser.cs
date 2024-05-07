@@ -14,6 +14,8 @@ using Common;
         public bool WasPayed { get; set; }
         public string CategoryName { get; set; }
         public virtual Plan Plan { get; set; }
+        public DateTime? StartSuscription { get; set; }
+        public DateTime? EndSuscription { get; set; }
         public ICollection<UserRecommendation> UserRecommendations { get; set; }
 
         [ForeignKey("UserId")]

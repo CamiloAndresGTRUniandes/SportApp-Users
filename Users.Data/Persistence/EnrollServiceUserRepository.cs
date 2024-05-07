@@ -23,6 +23,22 @@ using Microsoft.EntityFrameworkCore;
             return result;
         }
 
+        public async Task<bool> UpdateDatesEnrollUser(string userId, DateTime start, DateTime end, Guid planId)
+        {
+            var enrolls = await _context.EnrollServiceUser
+                .Where(p => p.UserId == userId)
+                .ToListAsync();
+
+            foreach (var enroll in enrolls)
+            {
+                enroll.PlanId = planId;
+                enroll.StartSuscription = start;
+                enroll.EndSuscription = end;
+            }
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
         public async Task<EnrollServiceUser> GetEnrollsByIdAsync(Guid id)
         {
             var result = await _context

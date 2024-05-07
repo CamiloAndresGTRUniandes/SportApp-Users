@@ -14,4 +14,6 @@ using Aplication.Models.Common.DTO;
         public string CategoryName { get; set; }
         public ReferencialTableDTO Plan { get; set; }
         public UserBasicInfo User { get; set; }
+        public DateTime? StartSuscription { get; set; }
+        public DateTime? EndSuscription { get; set; }
     }

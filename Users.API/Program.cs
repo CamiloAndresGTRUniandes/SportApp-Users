@@ -1,8 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using Service.Infra.Bus;
 using ServiceBus.Infra.IoC;
+using Services.Domain.Core.Bus;
 using Users.API.Middleware;
 using Users.Aplication;
+using Users.Application.EventHandlers;
+using Users.Application.Events;
 using Users.Infraestructure;
 using Users.Infraestructure.Persistence;
 
@@ -36,6 +39,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 
     var app = builder.Build();
+
+    var eventBus = app.Services.GetRequiredService<IEventBus>();
+    eventBus.Subscribe<PlanEnrolledEvent, PlanEnrolledEventHandler>("sportapp.users.planenrolled");
 
 // Configure the HTTP request pipeline.
     if (app.Environment.IsDevelopment())
