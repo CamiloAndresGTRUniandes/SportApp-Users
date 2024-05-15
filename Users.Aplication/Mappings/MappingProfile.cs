@@ -34,12 +34,18 @@ using Models.Common.DTO;
         public MappingProfile()
         {
             CreateMap<Genre, GetAllGenresResult>().ReverseMap();
+            CreateMap<Genre, ReferencialTableDTO>().ReverseMap();
+
             CreateMap<Country, GetAllCountryResult>().ReverseMap();
+            CreateMap<Country, ReferencialTableDTO>().ReverseMap();
             CreateMap<State, GetStatesByCountryResult>().ReverseMap();
+            CreateMap<State, ReferencialTableDTO>().ReverseMap();
             CreateMap<City, GetCityByStateResult>().ReverseMap();
+            CreateMap<City, ReferencialTableDTO>().ReverseMap();
             CreateMap<TypeOfNutrition, GetAllTypeOfNutritionResult>().ReverseMap();
             CreateMap<NutricionalAllergy, GetAllNutionalAllergiesResult>().ReverseMap();
             CreateMap<PhysicalLevel, GetAllPhysicalResult>().ReverseMap();
+            CreateMap<PhysicalLevel, ReferencialTableDTO>().ReverseMap();
             CreateMap<Activity, GetAllActivitiesResult>().ReverseMap();
             CreateMap<Goal, GetAllGoalsResult>().ReverseMap();
             CreateMap<NutrionalProfileDTO, NutrionalProfile>().ReverseMap();

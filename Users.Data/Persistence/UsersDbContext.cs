@@ -25,7 +25,7 @@ using Microsoft.EntityFrameworkCore;
         public DbSet<UserGoal> UserGoal { get; set; }
         public DbSet<SportProfile> SportProfile { get; set; }
         public DbSet<UserRecommendation> UserRecommendation { get; set; }
-        public DbSet<PhysicalLevel> PhysicalLevel { get; }
+        public DbSet<PhysicalLevel> PhysicalLevel { get; set; }
         public DbSet<TypeOfRecommendation> TypeOfRecommendation { get; set; }
         public DbSet<Plan> Plan { get; set; }
         public DbSet<EnrollServiceUser> EnrollServiceUser { get; set; }
