@@ -17,7 +17,7 @@ using Users.Infraestructure.Persistence;
             _unitOfWork = MockUnitOfWork.GetUnitOfWork();
             var mapperConfig = new MapperConfiguration(c => { c.AddProfile<MappingProfile>(); });
             _mapper = mapperConfig.CreateMapper();
-            MockGenresRepository.AddDataGoalsRepository(_unitOfWork.Object.UsersDbContext);
+            MockGenresRepository.AddDataGenreRepository(_unitOfWork.Object.UsersDbContext);
         }
 
         [Fact]

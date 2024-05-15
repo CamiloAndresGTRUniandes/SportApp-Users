@@ -5,6 +5,7 @@ using Contracts.Persistence;
 using Dominio;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Models.Common.DTO;
 using Services.Domain.Core.Bus;
 
     public class UpdateUserProfileHandler(
@@ -43,6 +44,11 @@ using Services.Domain.Core.Bus;
             await SaveSportProfile(request, user);
             await _userManager.UpdateAsync(user);
             var userProfileCommandBus = _mapper.Map<UserProfileEventBus>(request);
+            userProfileCommandBus.Genre = await GetGenre(request.GenreId);
+            userProfileCommandBus.Country = await GetCountry(request.CountryId);
+            userProfileCommandBus.State = await GetState(request.StateId);
+            userProfileCommandBus.City = await GetCity(request.CityId);
+            userProfileCommandBus.PhisicalLevel = await PhisicalLevel(request.SportProfile.PhysicalLevelId);
             await _bus.Publish(userProfileCommandBus);
 
             return Unit.Value;
@@ -195,5 +201,36 @@ using Services.Domain.Core.Bus;
                 sportProfileCreate.User = user;
                 await _unitOfWork.Repository<SportProfile>().AddAsync(sportProfileCreate);
             }
+        }
+
+
+        private async Task<ReferencialTableDTO> GetGenre(Guid genreId)
+        {
+            var genre = await _unitOfWork.GenreRepository.GetAsync(genreId);
+            return _mapper.Map<ReferencialTableDTO>(genre);
+        }
+
+        private async Task<ReferencialTableDTO> GetCountry(Guid id)
+        {
+            var data = await _unitOfWork.CountryRepository.GetAsync(id);
+            return _mapper.Map<ReferencialTableDTO>(data);
+        }
+
+        private async Task<ReferencialTableDTO> GetState(Guid id)
+        {
+            var data = await _unitOfWork.StateRepository.GetAsync(id);
+            return _mapper.Map<ReferencialTableDTO>(data);
+        }
+
+        private async Task<ReferencialTableDTO> GetCity(Guid id)
+        {
+            var data = await _unitOfWork.CityRepository.GetAsync(id);
+            return _mapper.Map<ReferencialTableDTO>(data);
+        }
+
+        private async Task<ReferencialTableDTO> PhisicalLevel(Guid id)
+        {
+            var data = await _unitOfWork.PhysicalLevelRepository.GetAsync(id);
+            return _mapper.Map<ReferencialTableDTO>(data);
         }
     }
