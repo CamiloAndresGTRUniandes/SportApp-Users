@@ -15,4 +15,6 @@ using Aplication.Models.Common.DTO;
         public ReferencialTableDTO TypeOfRecommendation { get; set; }
         public Guid EnrollServiceUserId { get; set; }
         public DateTime? CreatedAt { get; set; }
+        public DateTime? StartSuscription { get; set; }
+        public DateTime? EndSuscription { get; set; }
     }
