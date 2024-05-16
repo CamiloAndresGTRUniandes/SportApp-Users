@@ -1,5 +1,6 @@
 ﻿namespace Users.Infraestructure.Persistence ;
 using Application.Contracts.Persistence;
+using Application.Events;
 using Dominio;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,10 +21,24 @@ using Microsoft.EntityFrameworkCore;
                 .ThenInclude(tp => tp.TypeOfRecommendation)
                 .ToListAsync();
 
+            foreach (var enrrollUser in result)
+            {
+                if (enrrollUser.Plan.Name.ToLower().Contains("basic") || enrrollUser.EndSuscription is null ||
+                    enrrollUser.EndSuscription < DateTime.UtcNow)
+                {
+                    enrrollUser.WasPayed = false;
+                }
+                else
+                {
+                    enrrollUser.WasPayed = true;
+                }
+            }
+
+            await _context.SaveChangesAsync();
             return result;
         }
 
-        public async Task<bool> UpdateDatesEnrollUser(string userId, DateTime start, DateTime end, Guid planId)
+        public async Task<bool> UpdateDatesEnrollUser(string userId, DateTime start, DateTime end, PlanEvent planEvent)
         {
             var enrolls = await _context.EnrollServiceUser
                 .Where(p => p.UserId == userId)
@@ -31,7 +46,8 @@ using Microsoft.EntityFrameworkCore;
 
             foreach (var enroll in enrolls)
             {
-                enroll.PlanId = planId;
+                await SavePlan(planEvent);
+                enroll.PlanId = planEvent.Id;
                 enroll.StartSuscription = start;
                 enroll.EndSuscription = end;
             }
@@ -51,5 +67,27 @@ using Microsoft.EntityFrameworkCore;
                 .FirstOrDefaultAsync();
 
             return result;
+        }
+
+        private async Task SavePlan(PlanEvent planEvent)
+        {
+            var planUpdate = await _context.Plan.Where(p => p.Id == planEvent.Id).FirstOrDefaultAsync();
+            if (planUpdate != null)
+            {
+                planUpdate.Name = planEvent.Name;
+                planUpdate.Price = planEvent.Price;
+                planUpdate.UpdateBy = "System";
+            }
+            else
+            {
+                Plan planCreated = new();
+                planCreated.Name = planEvent.Name;
+                planCreated.Price = planEvent.Price;
+                planCreated.CreatedBy = "System";
+
+                _context.Plan.Add(planCreated);
+            }
+
+            await _context.SaveChangesAsync();
         }
     }
