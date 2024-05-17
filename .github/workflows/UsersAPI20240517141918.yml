@@ -1,10 +1,10 @@
-name: Build and deploy .NET Core application to Web App UsersAPI20240429224611
+name: Build and deploy .NET Core application to Web App UsersAPI20240517141918
 on:
   push:
     branches:
     - develop
 env:
-  AZURE_WEBAPP_NAME: UsersAPI20240429224611
+  AZURE_WEBAPP_NAME: UsersAPI20240517141918
   AZURE_WEBAPP_PACKAGE_PATH: Users.API/publish
   CONFIGURATION: Release
   DOTNET_CORE_VERSION: 8.0.x
@@ -44,5 +44,5 @@ jobs:
       uses: azure/webapps-deploy@v2
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        publish-profile: ${{ secrets.UsersAPI20240429224611_C613 }}
+        publish-profile: ${{ secrets.UsersAPI20240517141918_F1FC }}
         package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
