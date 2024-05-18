@@ -33,6 +33,7 @@ using Microsoft.EntityFrameworkCore;
         public DbSet<ProductEventSuscription> ProductEventSuscription { get; set; }
         public DbSet<RecordTrainingSession> RecordTrainingSession { get; set; }
         public DbSet<Intensity> Intensity { get; set; }
+        public DbSet<SuscriptionUser> SuscriptionUser { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {

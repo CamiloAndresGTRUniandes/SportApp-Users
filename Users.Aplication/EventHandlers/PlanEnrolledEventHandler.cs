@@ -14,7 +14,6 @@ using Services.Domain.Core.Bus;
 
         public async Task Handle(PlanEnrolledEvent @event)
         {
-            await _unitOfWork.EnrollServiceUserRepository.UpdateDatesEnrollUser(@event.UserId, @event.StartDate, @event.EndDate, @event.Plan
-                );
+            await _unitOfWork.EnrollServiceUserRepository.UpdateDatesEnrollUser(@event);
         }
     }
