@@ -38,20 +38,11 @@ using Microsoft.EntityFrameworkCore;
             return result;
         }
 
-        public async Task<bool> UpdateDatesEnrollUser(string userId, DateTime start, DateTime end, PlanEvent planEvent)
+        public async Task<bool> UpdateDatesEnrollUser(PlanEnrolledEvent @event)
         {
-            var enrolls = await _context.EnrollServiceUser
-                .Where(p => p.UserId == userId)
-                .ToListAsync();
-
-            foreach (var enroll in enrolls)
-            {
-                await SavePlan(planEvent);
-                enroll.PlanId = planEvent.Id;
-                enroll.StartSuscription = start;
-                enroll.EndSuscription = end;
-            }
-            await _context.SaveChangesAsync();
+            await SavePlan(@event.Plan);
+            await SaveEnroll(@event);
+            await SaveSuscription(@event);
             return true;
         }
 
@@ -67,6 +58,50 @@ using Microsoft.EntityFrameworkCore;
                 .FirstOrDefaultAsync();
 
             return result;
+        }
+
+        private async Task SaveEnroll(PlanEnrolledEvent @event)
+        {
+            var enrolls = await _context.EnrollServiceUser
+                .Where(p => p.UserId == @event.UserId)
+                .ToListAsync();
+
+            foreach (var enroll in enrolls)
+            {
+                enroll.PlanId = @event.Plan.Id;
+                enroll.StartSuscription = @event.StartDate;
+                enroll.EndSuscription = @event.EndDate;
+            }
+            await _context.SaveChangesAsync();
+        }
+
+
+        private async Task SaveSuscription(PlanEnrolledEvent @event)
+        {
+            var suscriptionUpdate = await _context.SuscriptionUser
+                .Where(p => p.SubscriptionId == @event.SubscriptionId)
+                .FirstOrDefaultAsync();
+
+            if (suscriptionUpdate != null)
+            {
+                suscriptionUpdate.SubscriptionId = @event.SubscriptionId;
+                suscriptionUpdate.EndDate = @event.EndDate;
+                suscriptionUpdate.StartDate = @event.EndDate;
+                suscriptionUpdate.PlanId = @event.Plan.Id;
+                suscriptionUpdate.UpdateBy = "System";
+            }
+            else
+            {
+                var suscriptionCreated = new SuscriptionUser();
+                suscriptionCreated.SubscriptionId = @event.SubscriptionId;
+                suscriptionCreated.EndDate = @event.EndDate;
+                suscriptionCreated.StartDate = @event.EndDate;
+                suscriptionCreated.PlanId = @event.Plan.Id;
+                suscriptionCreated.UserId = @event.UserId;
+                suscriptionCreated.CreatedBy = "System";
+                _context.SuscriptionUser.Add(suscriptionCreated);
+            }
+            await _context.SaveChangesAsync();
         }
 
         private async Task SavePlan(PlanEvent planEvent)
