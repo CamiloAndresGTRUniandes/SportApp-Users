@@ -3,6 +3,7 @@ on:
   push:
     branches:
     - develop
+    - main
 env:
   AZURE_WEBAPP_NAME: UsersAPI20240517141918
   AZURE_WEBAPP_PACKAGE_PATH: Users.API/publish
