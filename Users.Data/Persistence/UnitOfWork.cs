@@ -1,58 +1,91 @@
-﻿using Users.Aplication.Contracts.Persistence;
-using Users.Dominio.Common;
+﻿namespace Users.Infraestructure.Persistence ;
 using System.Collections;
+using Aplication.Contracts.Persistence;
+using Application.Contracts.Persistence;
+using Dominio.Common;
 
-namespace Users.Infraestructure.Persistence
-{
-    public class UnitOfWork(UsersDbContext _context) : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
+        private IActivityRepository _activityRepository;
 
-        private Hashtable _repositories;
-
-
-        private IGenreRepository _genreRepository;
-        public IGenreRepository GenreRepository => _genreRepository ??= new GenreRepository(_context);
+        private ICityRepository _cityRepository;
 
 
         private ICountryRepository _countryRepository;
-        public ICountryRepository CountryRepository => _countryRepository ??= new CountryRepository(_context);
 
-        private IStateRepository _stateRepository;
-        public IStateRepository StateRepository => _stateRepository ??= new StateRepository(_context);
+        private IEnrollServiceUserRepository _enrollServiceUserRepository;
 
-        private ICityRepository _cityRepository;
-        public ICityRepository CityRepository => _cityRepository ??= new CityRepository(_context);
 
-        private INutricionalAllergyRepository _nutricionalAllergyRepository;
-        public INutricionalAllergyRepository NutricionalAllergyRepository => _nutricionalAllergyRepository ??= new NutricionalAllergyRepository(_context);
-
-        private ITypeOfNutritionRepository _typeOfNutritionRepository;
-        public ITypeOfNutritionRepository TypeOfNutritionRepository => _typeOfNutritionRepository ??= new TypeOfNutritionRepository(_context);
-
-        private IPhysicalLevelRepository _physicalLevelRepository;
-        public IPhysicalLevelRepository PhysicalLevelRepository => _physicalLevelRepository ??= new PhysicalLevelRepository(_context);
-
-        private IActivityRepository _activityRepository;
-        public IActivityRepository ActivityRepository => _activityRepository ??= new ActivityRepository(_context);
+        private IGenreRepository _genreRepository;
 
         private IGoalRepository _goalRepository;
-        public IGoalRepository GoalRepository => _goalRepository ??= new GoalRepository(_context);
+
+        private INutricionalAllergyRepository _nutricionalAllergyRepository;
 
         private INutrionalProfileRepository _nutrionalProfileRepository;
-        public INutrionalProfileRepository NutrionalProfileRepository => _nutrionalProfileRepository ??= new NutrionalProfileRepository(_context);
 
+        private IPhysicalLevelRepository _physicalLevelRepository;
+
+        private IRecordTrainingSessionRepository _recordTrainingSessionRepository;
+
+        private Hashtable _repositories;
+
+        private IStateRepository _stateRepository;
+
+        private ITypeOfNutritionRepository _typeOfNutritionRepository;
 
 
         private IUserAllergyRepository _userAllergyRepository;
-        public IUserAllergyRepository UserAllergyRepository => _userAllergyRepository ??= new UserAllergyRepository(_context);
+        public IUserRecomendationRepository _userRecomendationRepository;
 
-        public async Task<int> Complete() => await _context.SaveChangesAsync();
-        public void Dispose() => _context.Dispose();
+        public UnitOfWork(UsersDbContext context)
+        {
+            UsersDbContext = context;
+        }
+
+        public UsersDbContext UsersDbContext { get; }
+
+        public IGenreRepository GenreRepository => _genreRepository ??= new GenreRepository(UsersDbContext);
+        public ICountryRepository CountryRepository => _countryRepository ??= new CountryRepository(UsersDbContext);
+        public IStateRepository StateRepository => _stateRepository ??= new StateRepository(UsersDbContext);
+        public ICityRepository CityRepository => _cityRepository ??= new CityRepository(UsersDbContext);
+
+        public INutricionalAllergyRepository NutricionalAllergyRepository
+            => _nutricionalAllergyRepository ??= new NutricionalAllergyRepository(UsersDbContext);
+
+        public ITypeOfNutritionRepository TypeOfNutritionRepository => _typeOfNutritionRepository ??= new TypeOfNutritionRepository(UsersDbContext);
+        public IPhysicalLevelRepository PhysicalLevelRepository => _physicalLevelRepository ??= new PhysicalLevelRepository(UsersDbContext);
+        public IActivityRepository ActivityRepository => _activityRepository ??= new ActivityRepository(UsersDbContext);
+        public IGoalRepository GoalRepository => _goalRepository ??= new GoalRepository(UsersDbContext);
+
+        public INutrionalProfileRepository NutrionalProfileRepository
+            => _nutrionalProfileRepository ??= new NutrionalProfileRepository(UsersDbContext);
+
+        public IUserAllergyRepository UserAllergyRepository => _userAllergyRepository ??= new UserAllergyRepository(UsersDbContext);
+
+        public IEnrollServiceUserRepository EnrollServiceUserRepository
+            => _enrollServiceUserRepository ??= new EnrollServiceUserRepository(UsersDbContext);
+
+        public IUserRecomendationRepository UserRecomendationRepository
+            => _userRecomendationRepository ?? new UserRecomendationRepository(UsersDbContext);
+
+        public IRecordTrainingSessionRepository RecordTrainingSessionRepository
+            => _recordTrainingSessionRepository ??= new RecordTrainingSessionRepository(UsersDbContext);
+
+
+        public async Task<int> Complete()
+        {
+            return await UsersDbContext.SaveChangesAsync();
+        }
+
+        public void Dispose()
+        {
+            UsersDbContext.Dispose();
+        }
 
 
         public IAsyncRepository<TEntity> Repository<TEntity>() where TEntity : BaseDomainModel
         {
-
             if (_repositories == null)
             {
                 _repositories = new Hashtable();
@@ -63,11 +96,10 @@ namespace Users.Infraestructure.Persistence
             if (!_repositories.Contains(type))
             {
                 var repositoryType = typeof(RepositoryBase<>);
-                var repositoryInstance = Activator.CreateInstance(repositoryType.MakeGenericType(typeof(TEntity)), _context);
+                var repositoryInstance = Activator.CreateInstance(repositoryType.MakeGenericType(typeof(TEntity)), UsersDbContext);
                 _repositories.Add(type, repositoryInstance);
             }
 
             return (IAsyncRepository<TEntity>)_repositories[type];
         }
     }
-}

@@ -11,11 +11,9 @@ using Microsoft.EntityFrameworkCore;
         {
         }
 
-
         public DbSet<Activity> Activity { get; set; }
         public DbSet<Genre> Genre { get; set; }
         public DbSet<Goal> Goal { get; set; }
-
         public DbSet<City> City { get; set; }
         public DbSet<State> State { get; set; }
         public DbSet<Country> Country { get; set; }
@@ -26,9 +24,16 @@ using Microsoft.EntityFrameworkCore;
         public DbSet<UserAllergy> UserAllergy { get; set; }
         public DbSet<UserGoal> UserGoal { get; set; }
         public DbSet<SportProfile> SportProfile { get; set; }
-
-        public DbSet<PhysicalLevel> PhysicalLevel { get; }
-
+        public DbSet<UserRecommendation> UserRecommendation { get; set; }
+        public DbSet<PhysicalLevel> PhysicalLevel { get; set; }
+        public DbSet<TypeOfRecommendation> TypeOfRecommendation { get; set; }
+        public DbSet<Plan> Plan { get; set; }
+        public DbSet<EnrollServiceUser> EnrollServiceUser { get; set; }
+        public DbSet<UserGoalTracking> UserGoalTracking { get; set; }
+        public DbSet<ProductEventSuscription> ProductEventSuscription { get; set; }
+        public DbSet<RecordTrainingSession> RecordTrainingSession { get; set; }
+        public DbSet<Intensity> Intensity { get; set; }
+        public DbSet<SuscriptionUser> SuscriptionUser { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
@@ -53,10 +58,10 @@ using Microsoft.EntityFrameworkCore;
         {
             base.OnModelCreating(modelBuilder);
 
-
+            modelBuilder.ApplyConfiguration(new IntensityConfiguration());
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
-
-
+            modelBuilder.ApplyConfiguration(new TypeOfRecommendationsConfiguration());
+            modelBuilder.ApplyConfiguration(new PlanConfiguration());
             modelBuilder.Entity<Activity>()
                 .HasMany(p => p.Users)
                 .WithMany(p => p.Activities)
@@ -91,5 +96,30 @@ using Microsoft.EntityFrameworkCore;
                 .UsingEntity<UserGoal>(
                     c => c.HasKey(e => new { e.GoalId, e.UsersId, e.Id })
                 );
+
+
+            modelBuilder.Entity<ApplicationUser>()
+                .HasMany<UserRecommendation>()
+                .WithOne(g => g.User)
+                .HasForeignKey(j => j.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<ApplicationUser>()
+                .HasMany<UserRecommendation>()
+                .WithOne(g => g.UserAsociate)
+                .HasForeignKey(j => j.UserAsociateId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<ApplicationUser>()
+                .HasMany<EnrollServiceUser>()
+                .WithOne(g => g.User)
+                .HasForeignKey(j => j.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<ApplicationUser>()
+                .HasMany<EnrollServiceUser>()
+                .WithOne(g => g.UserAsociate)
+                .HasForeignKey(j => j.UserAsociateId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }

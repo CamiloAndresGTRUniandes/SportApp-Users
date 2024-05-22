@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Users.Dominio\Users.Dominio.csproj" />
+    <ProjectReference Include="..\Services.Domain.Core\Services.Domain.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,6 +19,10 @@
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\RecordTrainingSessions\Queries\" />
   </ItemGroup>
 
 </Project>

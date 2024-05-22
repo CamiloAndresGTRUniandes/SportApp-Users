@@ -1,10 +1,11 @@
-name: Compilar e implementar la aplicación de .NET Core en la aplicación web SportAppUsersApi
+name: Build and deploy .NET Core application to Web App UsersAPI20240517141918
 on:
   push:
     branches:
-    - Develop
+    - develop
+    - main
 env:
-  AZURE_WEBAPP_NAME: SportAppUsersApi
+  AZURE_WEBAPP_NAME: UsersAPI20240517141918
   AZURE_WEBAPP_PACKAGE_PATH: Users.API/publish
   CONFIGURATION: Release
   DOTNET_CORE_VERSION: 8.0.x
@@ -44,5 +45,5 @@ jobs:
       uses: azure/webapps-deploy@v2
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        publish-profile: ${{ secrets.SportAppUsersApi_FCBD }}
+        publish-profile: ${{ secrets.UsersAPI20240517141918_F1FC }}
         package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}

@@ -1,32 +1,29 @@
-﻿using AutoMapper;
+﻿namespace Users.Aplication.Features.UsersSportProfile.Queries.GetUserById ;
+using AutoMapper;
+using Contracts.Aplications;
+using Contracts.Persistence;
+using Dominio;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
-using Users.Aplication.Contracts.Aplications;
-using Users.Aplication.Contracts.Persistence;
-using Users.Aplication.Models.Common.DTO;
-using Users.Dominio;
+using Models.Common.DTO;
 
-namespace Users.Aplication.Features.UsersSportProfile.Queries.GetUserById
-{
-    public class GetUserByIdQueryHandler
-
-            (
-            IUnitOfWork _unitOfWork,
-            IMapper _mapper,
-           UserManager<ApplicationUser> _userManager,
-           IUtils _utils
+    public class GetUserByIdQueryHandler(
+        IUnitOfWork _unitOfWork,
+        IMapper _mapper,
+        UserManager<ApplicationUser> _userManager,
+        IUtils _utils
         )
         : IRequestHandler<GetUserByIdQuery, GetUserByIdQueryResult>
     {
         public async Task<GetUserByIdQueryResult> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
         {
-
-
             var user = _userManager.Users
-                       .Where(p => p.Id == request.UserId)
-                       .FirstOrDefault();
+                .Where(p => p.Id == request.UserId)
+                .FirstOrDefault();
             if (user == null)
+            {
                 throw new Exception($"Usuario con id {request.UserId} no existe");
+            }
 
             var userResult = _mapper.Map<GetUserByIdQueryResult>(user);
 
@@ -56,9 +53,5 @@ namespace Users.Aplication.Features.UsersSportProfile.Queries.GetUserById
 
 
             return userResult!;
-
         }
-
-
     }
-}

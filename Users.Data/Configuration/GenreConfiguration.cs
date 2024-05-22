@@ -3,9 +3,9 @@ using Dominio;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-    public class GenreConfiguration : IEntityTypeConfiguration<ApplicationUser>
+    public class GenreConfiguration : IEntityTypeConfiguration<Genre>
     {
-        public void Configure(EntityTypeBuilder<ApplicationUser> builder)
+        public void Configure(EntityTypeBuilder<Genre> builder)
         {
             builder.HasData(
                 new Genre

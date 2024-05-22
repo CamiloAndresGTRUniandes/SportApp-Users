@@ -1,16 +1,14 @@
-﻿using Newtonsoft.Json;
+﻿namespace Users.API.Middleware ;
 using System.Net;
+using Aplication.Exceptions;
+using Errors;
+using Newtonsoft.Json;
 
-using Users.API.Errors;
-using Users.Aplication.Exceptions;
-
-namespace Users.API.Middleware
-{
     public class ExceptionMiddleware
     {
-        private readonly RequestDelegate _requestDelegate;
-        private readonly ILogger<ExceptionMiddleware> _logger;
         private readonly IHostEnvironment _env;
+        private readonly ILogger<ExceptionMiddleware> _logger;
+        private readonly RequestDelegate _requestDelegate;
 
         public ExceptionMiddleware(RequestDelegate requestDelegate, ILogger<ExceptionMiddleware> logger, IHostEnvironment env)
         {
@@ -24,7 +22,6 @@ namespace Users.API.Middleware
             try
             {
                 await _requestDelegate(context);
-
             }
             catch (Exception ex)
             {
@@ -35,7 +32,6 @@ namespace Users.API.Middleware
 
                 switch (ex)
                 {
-
                     case NotFoundException notFoundException:
                         statusCode = (int)HttpStatusCode.NotFound;
                         break;
@@ -47,8 +43,6 @@ namespace Users.API.Middleware
                     case BadRequestException badRequestException:
                         statusCode = (int)HttpStatusCode.BadRequest;
                         break;
-
-                    default: break;
                 }
 
 
@@ -62,5 +56,3 @@ namespace Users.API.Middleware
             }
         }
     }
-
-}
